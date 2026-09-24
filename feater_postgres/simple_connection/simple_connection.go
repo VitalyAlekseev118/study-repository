@@ -2,10 +2,14 @@ package simpleconnection
 
 import (
 	"context"
+	"os"
 
 	"github.com/jackc/pgx/v5"
 )
 
+//"postgres://postgres:NeroVit777$@localhost:5432/postgres?sslmode=disable"
+
 func CreateConnection(ctx context.Context) (*pgx.Conn, error) {
-	return pgx.Connect(ctx, "host=localhost port=5432 user=postgres password=NeroVit777$ dbname=postgres sslmode=disable")
+	connString := os.Getenv("CONN_STRING")
+	return pgx.Connect(ctx, connString)
 }
